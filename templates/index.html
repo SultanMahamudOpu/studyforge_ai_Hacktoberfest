@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyForge AI — Learn Smarter</title>
+  <meta name="description" content="StudyForge AI — an AI learning workspace for students.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <strong>StudyForge</strong>
+          <span>AI Learning Studio</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-section="dashboard">
+          <span>⌂</span> Dashboard
+        </button>
+        <button class="nav-item" data-section="tutor">
+          <span>✦</span> AI Tutor
+        </button>
+        <button class="nav-item" data-section="planner">
+          <span>◷</span> Study Planner
+        </button>
+        <button class="nav-item" data-section="quiz">
+          <span>✓</span> Smart Quiz
+        </button>
+        <button class="nav-item" data-section="pdf">
+          <span>▤</span> PDF Reader
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="mini-card">
+          <span class="pulse-dot"></span>
+          <div>
+            <strong>AI services</strong>
+            <small id="service-status">Checking...</small>
+          </div>
+        </div>
+        <p>Built with Gemma · LangChain · ElevenLabs</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="topbar-title">
+          <span>Student workspace</span>
+          <strong id="pageTitle">Dashboard</strong>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="themeBtn" title="Toggle theme">☾</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- Dashboard -->
+        <section class="section active" id="dashboard">
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow">YOUR AI STUDY COMPANION</div>
+              <h1>Learn <span>smarter.</span><br>Build knowledge that lasts.</h1>
+              <p>
+                Turn any topic into a structured lesson, personalized study plan,
+                interactive quiz, or grounded PDF conversation — all in one workspace.
+              </p>
+              <button class="primary-btn" data-go="tutor">Start Learning →</button>
+            </div>
+            <div class="hero-orb">
+              <div class="orb-core">✦</div>
+              <div class="orbit o1">AI</div>
+              <div class="orbit o2">PDF</div>
+              <div class="orbit o3">QUIZ</div>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">LEARNING TOOLS</span>
+              <h2>Everything you need to study</h2>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <button class="feature-card c1" data-go="tutor">
+              <div class="feature-icon">✦</div>
+              <div>
+                <h3>AI Tutor</h3>
+                <p>Learn any topic with structured explanations and examples.</p>
+              </div>
+              <span class="card-arrow">→</span>
+            </button>
+            <button class="feature-card c2" data-go="planner">
+              <div class="feature-icon">◷</div>
+              <div>
+                <h3>Study Planner</h3>
+                <p>Build a realistic day-by-day learning roadmap.</p>
+              </div>
+              <span class="card-arrow">→</span>
+            </button>
+            <button class="feature-card c3" data-go="quiz">
+              <div class="feature-icon">✓</div>
+              <div>
+                <h3>Smart Quiz</h3>
+                <p>Test yourself and understand every answer.</p>
+              </div>
+              <span class="card-arrow">→</span>
+            </button>
+            <button class="feature-card c4" data-go="pdf">
+              <div class="feature-icon">▤</div>
+              <div>
+                <h3>PDF Reader</h3>
+                <p>Upload your notes and ask grounded questions.</p>
+              </div>
+              <span class="card-arrow">→</span>
+            </button>
+          </div>
+
+          <div class="about-strip">
+            <div>
+              <span class="eyebrow">WHY STUDYFORGE?</span>
+              <h2>One place for focused learning.</h2>
+            </div>
+            <div class="about-points">
+              <span>✓ Structured learning</span>
+              <span>✓ Active recall</span>
+              <span>✓ Audio learning</span>
+              <span>✓ Document-grounded answers</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tutor -->
+        <section class="section" id="tutor">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">LEARN ANYTHING</span>
+              <h2>AI Tutor</h2>
+              <p>Give Gemma a topic and get a structured mini-lesson.</p>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <form class="control-card" id="tutorForm">
+              <label>What do you want to learn?</label>
+              <input id="tutorTopic" required placeholder="e.g. Binary Search Trees">
+
+              <div class="two-col">
+                <div>
+                  <label>Level</label>
+                  <select id="tutorLevel">
+                    <option>beginner</option>
+                    <option>intermediate</option>
+                    <option>advanced</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Language</label>
+                  <select id="tutorLanguage">
+                    <option>English</option>
+                    <option>Bangla</option>
+                  </select>
+                </div>
+              </div>
+
+              <label>Follow-up (optional)</label>
+              <textarea id="tutorFollowUp" rows="4" placeholder="Ask for an extra example, simpler explanation, practice problem..."></textarea>
+
+              <button class="primary-btn full" type="submit">Generate Lesson ✦</button>
+            </form>
+
+            <div class="result-card">
+              <div class="result-toolbar">
+                <span class="result-label">LESSON</span>
+                <div class="toolbar-actions">
+                  <button class="small-btn" data-export="tutor">↓ PDF</button>
+                  <button class="small-btn" data-audio="tutor">▶ Audio</button>
+                </div>
+              </div>
+              <div class="loader hidden" id="tutorLoader"><span></span> Gemma is preparing your lesson...</div>
+              <article class="markdown-result empty-state" id="tutorResult">
+                <div class="empty-icon">✦</div>
+                <h3>Your lesson will appear here</h3>
+                <p>Choose a topic and let your AI tutor build the lesson.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Planner -->
+        <section class="section" id="planner">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">BUILD A ROUTINE</span>
+              <h2>AI Study Planner</h2>
+              <p>Turn your goal and available time into a practical plan.</p>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <form class="control-card" id="plannerForm">
+              <label>What do you want to master?</label>
+              <input id="planTopic" required placeholder="e.g. Machine Learning">
+
+              <div class="two-col">
+                <div>
+                  <label>Minutes / day</label>
+                  <input id="planMinutes" type="number" min="10" max="720" value="60">
+                </div>
+                <div>
+                  <label>Number of days</label>
+                  <input id="planDays" type="number" min="1" max="365" value="14">
+                </div>
+              </div>
+
+              <div class="two-col">
+                <div>
+                  <label>Level</label>
+                  <select id="planLevel">
+                    <option>beginner</option>
+                    <option>intermediate</option>
+                    <option>advanced</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Language</label>
+                  <select id="planLanguage">
+                    <option>English</option>
+                    <option>Bangla</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="primary-btn full" type="submit">Build My Plan ◷</button>
+            </form>
+
+            <div class="result-card">
+              <div class="result-toolbar">
+                <span class="result-label">STUDY ROADMAP</span>
+                <div class="toolbar-actions">
+                  <button class="small-btn" data-export="planner">↓ PDF</button>
+                  <button class="small-btn" data-audio="planner">▶ Audio</button>
+                </div>
+              </div>
+              <div class="loader hidden" id="plannerLoader"><span></span> Building your roadmap...</div>
+              <article class="markdown-result empty-state" id="plannerResult">
+                <div class="empty-icon">◷</div>
+                <h3>Your study plan will appear here</h3>
+                <p>Set your daily time, duration, and level.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quiz -->
+        <section class="section" id="quiz">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">TEST YOURSELF</span>
+              <h2>Smart Quiz</h2>
+              <p>Generate a quiz, submit it, and learn from every explanation.</p>
+            </div>
+          </div>
+
+          <div class="quiz-builder" id="quizBuilder">
+            <form class="control-card" id="quizForm">
+              <label>Quiz topic</label>
+              <input id="quizTopic" required placeholder="e.g. Python OOP">
+
+              <div class="two-col">
+                <div>
+                  <label>Difficulty</label>
+                  <select id="quizDifficulty">
+                    <option>easy</option>
+                    <option selected>medium</option>
+                    <option>hard</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Questions</label>
+                  <input id="quizCount" type="number" min="1" max="20" value="5">
+                </div>
+              </div>
+
+              <label>Language</label>
+              <select id="quizLanguage">
+                <option>English</option>
+                <option>Bangla</option>
+              </select>
+
+              <button class="primary-btn full" type="submit">Generate Quiz ✓</button>
+            </form>
+          </div>
+
+          <div class="quiz-area hidden" id="quizArea">
+            <div class="quiz-top">
+              <div>
+                <span class="eyebrow">ACTIVE QUIZ</span>
+                <h3 id="quizTitle">Quiz</h3>
+              </div>
+              <div class="score-pill" id="quizProgress">0 / 0</div>
+            </div>
+            <form id="quizSubmitForm">
+              <div id="quizQuestions"></div>
+              <button class="primary-btn" type="submit">Submit Quiz →</button>
+            </form>
+            <div class="quiz-results hidden" id="quizResults"></div>
+          </div>
+        </section>
+
+        <!-- PDF -->
+        <section class="section" id="pdf">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">ASK YOUR DOCUMENT</span>
+              <h2>PDF Reader & Chat</h2>
+              <p>Upload a PDF and ask questions. Answers are grounded in the document.</p>
+            </div>
+          </div>
+
+          <div class="pdf-workspace">
+            <div class="pdf-upload-card" id="dropZone">
+              <div class="upload-icon">↑</div>
+              <h3>Drop your PDF here</h3>
+              <p>or choose a file from your computer</p>
+              <input type="file" id="pdfInput" accept=".pdf,application/pdf" hidden>
+              <button class="secondary-btn" type="button" id="choosePdf">Choose PDF</button>
+              <div class="file-status" id="fileStatus">No document loaded</div>
+            </div>
+
+            <div class="chat-card">
+              <div class="chat-header">
+                <div>
+                  <span class="result-label">DOCUMENT CHAT</span>
+                  <strong id="chatDocName">Upload a PDF to begin</strong>
+                </div>
+              </div>
+              <div class="chat-messages" id="chatMessages">
+                <div class="chat-bubble assistant">
+                  <strong>StudyForge</strong>
+                  <p>Upload a PDF, then ask me a question. I will only answer from the document.</p>
+                </div>
+              </div>
+              <form class="chat-input" id="pdfChatForm">
+                <input id="pdfQuestion" placeholder="Ask something about your PDF..." disabled required>
+                <button class="primary-btn" type="submit" disabled id="pdfAskBtn">Ask</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
