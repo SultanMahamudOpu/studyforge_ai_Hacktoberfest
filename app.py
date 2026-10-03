@@ -738,17 +738,12 @@ def internal_server_error(error):
 # ============================================================
 
 if __name__ == "__main__":
-    port = int(
-        os.getenv(
-            "PORT",
-            "5000",
-        )
-    )
+    port = int(os.getenv("PORT", "5000"))
 
     print("\n" + "=" * 60)
     print("StudyForge AI")
     print("=" * 60)
-    print(f"Server: http://127.0.0.1:{port}")
+    print(f"Server: http://0.0.0.0:{port}")
     print(f"Gemma configured: {bool(os.getenv('GEMINI_API_KEY'))}")
     print(
         "ElevenLabs configured: "
@@ -760,5 +755,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=port,
-        debug=True,
+        debug=False,
     )
